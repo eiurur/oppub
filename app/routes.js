@@ -1,7 +1,7 @@
-const moment = require('moment');
 const { DLSite } = require('mizu');
 const redisClient = require('./model');
 const { validate, takeRandom, querystring } = require('./util');
+const { logging } = require('./middleware');
 const { logger } = require('../logger');
 
 module.exports = (app) => {
@@ -9,20 +9,19 @@ module.exports = (app) => {
     res.send('pong');
   });
 
-  app.get('/ranking', async (req, res) => {
+  app.get('/ranking', [logging], async (req, res) => {
     try {
       validate(req.query);
 
       const { term, range, type, category, sub, aid, count = 4 } = req.query;
 
-      const yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
       const key = querystring({
-        date: yesterday,
         term,
         type,
         category,
         range,
         sub,
+        aid,
       });
       const ls = await redisClient.getAsync(key);
       if (ls) {
