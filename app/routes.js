@@ -23,12 +23,12 @@ module.exports = (app) => {
         sub,
         aid,
       });
-      const ls = await redisClient.getAsync(key);
-      if (ls) {
+      const cache = await redisClient.getAsync(key);
+      if (cache) {
         logger.info('cache');
-        const list = JSON.parse(ls);
-        if (Array.isArray(list) && list.length) {
-          return res.send(takeRandom(list, count));
+        const works = JSON.parse(cache);
+        if (Array.isArray(works) && works.length) {
+          return res.send(takeRandom(works, count));
         }
       }
 
@@ -42,13 +42,13 @@ module.exports = (app) => {
         limit: 100,
       };
       const servive = new DLSite(initial);
-      const result = await servive.scrape({
+      const works = await servive.scrape({
         amount: -1,
         options,
       });
-      await redisClient.set(key, JSON.stringify(result));
+      await redisClient.set(key, JSON.stringify(works));
 
-      res.send(takeRandom(result, count));
+      res.send(takeRandom(works, count));
     } catch (err) {
       logger.info(err);
       res.status(400).send(err.toString());
