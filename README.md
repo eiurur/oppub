@@ -2,7 +2,7 @@
 
 [WIP] DLSite のランキング入り作品をアフィリエイト ID 付きで返すやつ。
 
-**requet**
+**request**
 
 http://oppub.eiurur.xyz/ranking?term=days&range=new&type=maniax&category=voice&sub=SOU&aid=kawpaa
 
