@@ -1,6 +1,6 @@
 # oppub
 
-[WIP] DLSite のランキング情報をアフィリエイト ID 付きで返すやつ。
+[WIP] DLSite のランキング入り作品をアフィリエイト ID 付きで返すやつ。
 
 **requet**
 
