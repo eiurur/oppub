@@ -13,15 +13,7 @@ module.exports = (app) => {
     try {
       validate(req.query);
 
-      const {
-        term,
-        range,
-        type,
-        category,
-        sub,
-        aid = 'kawpaa',
-        count = 4,
-      } = req.query;
+      const { term, range, type, category, sub, aid, count = 4 } = req.query;
 
       const yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
       const key = querystring({
